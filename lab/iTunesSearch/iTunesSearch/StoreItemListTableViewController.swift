@@ -53,14 +53,6 @@ class StoreItemListTableViewController: UITableViewController {
                     }
                    
                     
-                    storeItems.forEach { item in
-                        print("""
-                        Name: \(item.trackName)
-                        Artist: \(item.artistName)
-                        Kind: \(item.kind)
-
-                        """)
-                    }
                 } catch {
                     print("error")
                     print(error)
@@ -92,16 +84,17 @@ class StoreItemListTableViewController: UITableViewController {
         Task {
               do {
                   let image = try await storeItem.fetchImage(from: item.artworkUrl100)
+                  // if successful, set the cell.artworkImage using the returned image
                   cell.artworkImage = image
                   
               } catch {
-                  print("error getting the image ")
-//                  imageLoadTasks[indexPath.row:] =
+                  print(error)
+//                  print("error getting the image " \(error))
+                
               }
           }
         
         
-        // if successful, set the cell.artworkImage using the returned image
     }
     
     @IBAction func filterOptionUpdated(_ sender: UISegmentedControl) {
