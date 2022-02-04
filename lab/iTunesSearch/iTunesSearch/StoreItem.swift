@@ -16,7 +16,8 @@ struct StoreItem: Codable {
     var artistName: String
     var trackName: String
     var kind: String
-    var primaryGenreName: String
+    var artworkUrl100: URL
+//    var primaryGenreName: String
     
 }
 struct SearchResponse: Codable {
