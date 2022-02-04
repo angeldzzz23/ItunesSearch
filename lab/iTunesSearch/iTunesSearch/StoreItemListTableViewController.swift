@@ -12,6 +12,7 @@ class StoreItemListTableViewController: UITableViewController {
     var items = [StoreItem]()
     var imageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     
+    
     let queryOptions = ["movie", "music", "software", "ebook"]
     let storeItem = StoreItemController()
     
@@ -39,6 +40,7 @@ class StoreItemListTableViewController: UITableViewController {
 //                    "limit" :  "10"
                 ]
         
+            
             Task {
                 do {
                     let storeItems = try await storeItem.fetchItems(matching: query)
@@ -83,11 +85,20 @@ class StoreItemListTableViewController: UITableViewController {
         // set cell.artworkImage to nil
         cell.artworkImage = nil
         
-        // TODO:
         // initialize a network task to fetch the item's artwork keeping track of the task
         // in imageLoadTasks so they can be cancelled if the cell will not be shown after
         // the task completes.
         
+        Task {
+              do {
+                  let image = try await storeItem.fetchImage(from: item.artworkUrl100)
+                  cell.artworkImage = image
+                  
+              } catch {
+                  print("error getting the image ")
+//                  imageLoadTasks[indexPath.row:] =
+              }
+          }
         
         
         // if successful, set the cell.artworkImage using the returned image

@@ -9,6 +9,7 @@ import Foundation
 
 enum StoreItemError: Error, LocalizedError {
     case itemsNotFound
+    case imageDataMissing
 }
 
 
